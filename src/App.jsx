@@ -7,8 +7,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        {/* <Route path="/upload" element={<UploadFile />} /> */}
-        {/* Add the route for 404 */}
+        <Route path="/upload" element={<UploadFile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
