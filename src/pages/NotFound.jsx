@@ -5,7 +5,6 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    // Navigate back to the home page
     navigate('/');
   };
 

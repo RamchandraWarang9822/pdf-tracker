@@ -6,8 +6,8 @@ import { Menu } from 'lucide-react';
 
 const Dashboard = () => {
     const [pdfs, setPdfs] = useState([]);
-    const [currentPdfUrl, setCurrentPdfUrl] = useState("");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [currentPdfUrl, setCurrentPdfUrl] = useState("");
 
     const onClickUpdateUrl = (pdf) => {
         setCurrentPdfUrl(pdf.url);
@@ -35,23 +35,25 @@ const Dashboard = () => {
         fetchPdfs();
     }, []);
 
+    useEffect(() => {
+        let url = pdfs[0]?.url;
+        setCurrentPdfUrl(url)
+    }, [pdfs])
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
     return (
         <div className='flex h-screen'>
-            {/* Mobile Menu Button */}
             <div className='lg:hidden px-4 py-2 cursor-pointer' onClick={toggleMenu}>
                 <Menu size={24} />
             </div>
 
-            {/* PDFList as a sidebar (conditionally based on isMenuOpen) */}
             <div className={`w-1/4 border-r overflow-y-auto ${isMenuOpen ? 'block' : 'hidden'} lg:block flex-shrink-0`}>
                 <PDFList pdfs={pdfs} onClickUpdateUrl={onClickUpdateUrl} currentPdfUrl={currentPdfUrl} />
             </div>
 
-            {/* PDFViewer takes the majority of the screen */}
             <div className="w-3/4">
                 <PDFViewer currentPdfUrl={currentPdfUrl} />
             </div>
